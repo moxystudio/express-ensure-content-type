@@ -1,7 +1,7 @@
 {
   "name": "@moxy/express-ensure-content-type",
   "version": "0.0.0",
-  "description": "Express middleware that ensures requests match the specified content-type.",
+  "description": "Express middleware that ensures requests match the specified content-type",
   "author": "André Cruz <andre@moxy.studio>",
   "license": "MIT",
   "homepage": "https://github.com/moxystudio/express-ensure-content-type#readme",
