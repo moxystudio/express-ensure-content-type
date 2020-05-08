@@ -77,6 +77,8 @@ When to validate. Can be set to:
 - `body-present` - Validate if [body is present](https://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.3) (has [`transfer-encoding` or `content-length` headers)
 - `body-not-empty` - Same as `body-present` but skips if `Content-Length` is set to 0.
 
+> ℹ️ Validation is always done when `Content-Type` header is present in the request.
+
 ## Tests
 
 Any parameter passed to the `test` command is passed down to Jest.
