@@ -1,6 +1,6 @@
 {
   "name": "@moxy/express-ensure-content-type",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Express middleware that ensures requests match the specified content-type",
   "author": "André Cruz <andre@moxy.studio>",
   "license": "MIT",
@@ -39,5 +39,8 @@
     "jest": "^26.0.1",
     "lint-staged": "^10.1.6",
     "standard-version": "^7.1.0"
+  },
+  "config": {
+    "access": "public"
   }
 }
