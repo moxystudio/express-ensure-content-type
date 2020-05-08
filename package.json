@@ -39,8 +39,5 @@
     "jest": "^26.0.1",
     "lint-staged": "^10.1.6",
     "standard-version": "^7.1.0"
-  },
-  "config": {
-    "access": "public"
   }
 }
