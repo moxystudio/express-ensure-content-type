@@ -1,0 +1,43 @@
+{
+  "name": "@moxy/express-ensure-content-type",
+  "version": "0.0.0",
+  "description": "Express middleware that ensures requests match the specified content-type",
+  "author": "André Cruz <andre@moxy.studio>",
+  "license": "MIT",
+  "homepage": "https://github.com/moxystudio/express-ensure-content-type#readme",
+  "repository": "github:moxystudio/express-ensure-content-type",
+  "bugs": "https://github.com/moxystudio/express-ensure-content-type/issues",
+  "keywords": [
+    "express",
+    "content-type",
+    "media-type",
+    "enforce",
+    "ensure",
+    "validate"
+  ],
+  "main": "index.js",
+  "files": [],
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint . --ignore-path .gitignore",
+    "prerelease": "npm run lint && npm t",
+    "release": "standard-version",
+    "postrelease": "git push --follow-tags origin HEAD && npm publish"
+  },
+  "dependencies": {
+    "http-errors": "^1.7.3",
+    "type-is": "^1.6.18"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@moxy/eslint-config-base": "^12.1.0",
+    "@moxy/eslint-config-jest": "^12.1.0",
+    "@moxy/jest-config": "^4.2.0",
+    "eslint": "^6.8.0",
+    "husky": "^4.2.5",
+    "jest": "^26.0.1",
+    "lint-staged": "^10.1.6",
+    "standard-version": "^7.1.0"
+  }
+}
