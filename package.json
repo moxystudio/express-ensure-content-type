@@ -12,6 +12,7 @@
     "content-type",
     "media-type",
     "enforce",
+    "ensure",
     "validate"
   ],
   "main": "index.js",

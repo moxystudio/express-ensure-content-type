@@ -5,28 +5,11 @@ const { UnsupportedMediaType } = require('http-errors');
 
 const always = () => true;
 
-const bodyPresent = (req) => {
-    // Check if a content-type was explicitly passed.
-    if (req.headers['content-type']) {
-        return true;
-    }
+const bodyPresent = (req) => req.headers['transfer-encoding'] !== undefined ||
+                             !isNaN(req.headers['content-length']);
 
-    // Do not validate if there's no body.
-    return typeis.hasBody(req);
-};
-
-const bodyNotEmpty = (req) => {
-    const validate = bodyPresent(req);
-
-    if (!validate) {
-        return false;
-    }
-
-    // Validate if there's body but empty.
-    const contentLength = Number(req.headers['content-length']);
-
-    return contentLength > 0;
-};
+const bodyNotEmpty = (req) => req.headers['transfer-encoding'] !== undefined ||
+                              Number(req.headers['content-length']) > 0;
 
 const ensureContentType = (contentType, options) => {
     if (!Array.isArray(contentType)) {

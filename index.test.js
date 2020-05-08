@@ -10,7 +10,6 @@ const getError = (next) => {
 
 it('should validate when there\'s no content-type', () => {
     const middleware = ensureContentType('application/json');
-
     const next = jest.fn();
 
     middleware({
@@ -26,7 +25,6 @@ it('should validate when there\'s no content-type', () => {
 
 it('should validate when there\'s a wrong content-type', () => {
     const middleware = ensureContentType('application/json');
-
     const next = jest.fn();
 
     middleware({
@@ -44,7 +42,6 @@ it('should validate when there\'s a wrong content-type', () => {
 
 it('should validate when there\'s a wrong content-type (array)', () => {
     const middleware = ensureContentType(['application/json', 'text/json']);
-
     const next = jest.fn();
 
     middleware({
@@ -62,7 +59,6 @@ it('should validate when there\'s a wrong content-type (array)', () => {
 
 it('should call next when content-type matches', () => {
     const middleware = ensureContentType('json');
-
     const next = jest.fn();
 
     middleware({
@@ -74,31 +70,13 @@ it('should call next when content-type matches', () => {
     expect(getError(next)).toBe(undefined);
 });
 
-it('should throw if an invalid when was passed', () => {
+it('should throw if an invalid "when" was passed', () => {
     expect(() => ensureContentType('json', { when: 'foo' })).toThrow('Invalid options.when: "foo"');
 });
 
 describe('when body-present', () => {
-    it('should validate if content-type is set', () => {
-        const middleware = ensureContentType('application/json', { when: 'body-present' });
-
-        const next = jest.fn();
-
-        middleware({
-            headers: {
-                'content-type': 'text/plain',
-            },
-        }, {}, next);
-
-        const error = getError(next);
-
-        expect(error).toBeInstanceOf(Error);
-        expect(error.statusCode).toBe(415);
-    });
-
     it('should validate when transfer-encoding is set', () => {
         const middleware = ensureContentType('application/json', { when: 'body-present' });
-
         const next = jest.fn();
 
         middleware({
@@ -115,7 +93,6 @@ describe('when body-present', () => {
 
     it('should validate when content-length is set', () => {
         const middleware = ensureContentType('application/json', { when: 'body-present' });
-
         const next = jest.fn();
 
         middleware({
@@ -132,7 +109,6 @@ describe('when body-present', () => {
 
     it('should validate when transfer-encoding and content-length are set', () => {
         const middleware = ensureContentType('application/json', { when: 'body-present' });
-
         const next = jest.fn();
 
         middleware({
@@ -150,21 +126,6 @@ describe('when body-present', () => {
 
     it('should not validate if both transfer-encoding and content-length are not set', () => {
         const middleware = ensureContentType('application/json', { when: 'body-present' });
-
-        const next = jest.fn();
-
-        middleware({
-            headers: {},
-        }, {}, next);
-
-        expect(getError(next)).toBe(undefined);
-    });
-});
-
-describe('when body-not-empty', () => {
-    it('should validate if content-type is set', () => {
-        const middleware = ensureContentType('application/json', { when: 'body-present' });
-
         const next = jest.fn();
 
         middleware({
@@ -173,15 +134,13 @@ describe('when body-not-empty', () => {
             },
         }, {}, next);
 
-        const error = getError(next);
-
-        expect(error).toBeInstanceOf(Error);
-        expect(error.statusCode).toBe(415);
+        expect(getError(next)).toBe(undefined);
     });
+});
 
+describe('when body-not-empty', () => {
     it('should validate when transfer-encoding is set', () => {
         const middleware = ensureContentType('application/json', { when: 'body-not-empty' });
-
         const next = jest.fn();
 
         middleware({
@@ -198,7 +157,6 @@ describe('when body-not-empty', () => {
 
     it('should validate when content-length > 1', () => {
         const middleware = ensureContentType('application/json', { when: 'body-not-empty' });
-
         const next = jest.fn();
 
         middleware({
@@ -213,15 +171,14 @@ describe('when body-not-empty', () => {
         expect(error.statusCode).toBe(415);
     });
 
-    it('should validate when transfer-encoding is set and content-length > 1', () => {
+    it('should validate when transfer-encoding is set and content-length = 0', () => {
         const middleware = ensureContentType('application/json', { when: 'body-not-empty' });
-
         const next = jest.fn();
 
         middleware({
             headers: {
                 'transfer-encoding': 'chunked',
-                'content-length': '1',
+                'content-length': '0',
             },
         }, {}, next);
 
@@ -233,7 +190,6 @@ describe('when body-not-empty', () => {
 
     it('should not validate when both transfer-encoding and content-length are not set', () => {
         const middleware = ensureContentType('application/json', { when: 'body-not-empty' });
-
         const next = jest.fn();
 
         middleware({
@@ -243,14 +199,12 @@ describe('when body-not-empty', () => {
         expect(getError(next)).toBe(undefined);
     });
 
-    it('should not validate when content-length = 0', () => {
+    it('should not validate when transfer-encoding is not set and content-length = 0', () => {
         const middleware = ensureContentType('application/json', { when: 'body-not-empty' });
-
         const next = jest.fn();
 
         middleware({
             headers: {
-                'transfer-encoding': 'chunked',
                 'content-length': '0',
             },
         }, {}, next);
